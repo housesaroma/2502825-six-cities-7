@@ -1,5 +1,5 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../const';
+import {AppRoute} from '../const';
 import PrivateRoute from '../components/private-route/private-route';
 import MainPage from '../pages/main/main';
 import LoginPage from '../pages/login/login';
@@ -20,7 +20,7 @@ function App({offersCount}: AppProps): JSX.Element {
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+            <PrivateRoute isAuthorized={false}>
               <FavoritesPage />
             </PrivateRoute>
           }
