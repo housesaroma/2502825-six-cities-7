@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './app/app';
-import {fullOffers, offers} from './mocks/offers';
+import {amsterdam, fullOffers, offers} from './mocks/offers';
 import {favoriteOffers} from './mocks/favorites';
 
 const root = ReactDOM.createRoot(
@@ -11,6 +11,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <App
+      city={amsterdam}
       offers={offers}
       fullOffers={fullOffers}
       favoriteOffers={favoriteOffers}
