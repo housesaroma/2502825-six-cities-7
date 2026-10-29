@@ -1,13 +1,15 @@
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import OffersList from '../../components/offers-list/offers-list';
-import {OfferPreview} from '../../types/offer';
+import Map from '../../components/map/map';
+import {City, OfferPreview} from '../../types/offer';
 
 type MainPageProps = {
+  city: City;
   offers: OfferPreview[];
 };
 
-function MainPage({offers}: MainPageProps): JSX.Element {
+function MainPage({city, offers}: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -81,7 +83,7 @@ function MainPage({offers}: MainPageProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} places to stay in {city.name}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>{' '}
                 <span className="places__sorting-type" tabIndex={0}>
@@ -100,7 +102,7 @@ function MainPage({offers}: MainPageProps): JSX.Element {
               <OffersList offers={offers} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map className="cities__map" city={city} offers={offers} />
             </div>
           </div>
         </div>
