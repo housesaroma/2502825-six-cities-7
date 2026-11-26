@@ -6,19 +6,18 @@ import LoginPage from '../pages/login/login';
 import FavoritesPage from '../pages/favorites/favorites';
 import OfferPage from '../pages/offer/offer';
 import NotFoundPage from '../pages/not-found/not-found';
-import {Offer, OfferPreview} from '../types/offer';
-import {Review} from '../types/review';
 import {useAppSelector} from '../hooks';
-import {selectOffers} from '../store/selectors';
+import {selectIsOffersLoading, selectOffers} from '../store/selectors';
+import Spinner from '../components/spinner/spinner';
 
-type AppProps = {
-  fullOffers: Offer[];
-  favoriteOffers: OfferPreview[];
-  reviews: Review[];
-};
-
-function App({fullOffers, favoriteOffers, reviews}: AppProps): JSX.Element {
+function App(): JSX.Element {
   const offers = useAppSelector(selectOffers);
+  const isOffersLoading = useAppSelector(selectIsOffersLoading);
+  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+
+  if (isOffersLoading) {
+    return <Spinner />;
+  }
 
   return (
     <BrowserRouter>
@@ -33,7 +32,7 @@ function App({fullOffers, favoriteOffers, reviews}: AppProps): JSX.Element {
             </PrivateRoute>
           }
         />
-        <Route path={AppRoute.Offer} element={<OfferPage offers={fullOffers} nearbyOffers={offers} reviews={reviews} />} />
+        <Route path={AppRoute.Offer} element={<OfferPage offers={offers} />} />
         <Route path={AppRoute.NotFound} element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
