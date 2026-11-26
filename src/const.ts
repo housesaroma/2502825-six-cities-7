@@ -6,6 +6,10 @@ export const AppRoute = {
   NotFound: '*',
 } as const;
 
+export const APIRoute = {
+  Offers: '/offers',
+} as const;
+
 export const AuthorizationStatus = {
   Auth: 'AUTH',
   NoAuth: 'NO_AUTH',

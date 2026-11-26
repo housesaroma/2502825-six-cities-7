@@ -5,3 +5,5 @@ import {OfferPreview} from '../types/offer';
 export const changeCity = createAction<CityName>('city/change');
 
 export const fillOffers = createAction<OfferPreview[]>('offers/fill');
+
+export const setOffersLoadingStatus = createAction<boolean>('offers/setLoadingStatus');

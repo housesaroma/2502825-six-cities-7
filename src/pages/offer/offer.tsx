@@ -1,20 +1,17 @@
 import {Link, useParams} from 'react-router-dom';
 import {AppRoute, MAX_NEARBY_COUNT} from '../../const';
-import {Offer, OfferPreview} from '../../types/offer';
+import {OfferPreview} from '../../types/offer';
 import NotFoundPage from '../not-found/not-found';
 import ReviewForm from '../../components/review-form/review-form';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
 import OffersList from '../../components/offers-list/offers-list';
-import {Review} from '../../types/review';
 
 type OfferPageProps = {
-  offers: Offer[];
-  nearbyOffers: OfferPreview[];
-  reviews: Review[];
+  offers: OfferPreview[];
 };
 
-function OfferPage({offers, nearbyOffers, reviews}: OfferPageProps): JSX.Element {
+function OfferPage({offers}: OfferPageProps): JSX.Element {
   const {id} = useParams();
   const offer = offers.find((item) => item.id === id);
 
@@ -22,7 +19,7 @@ function OfferPage({offers, nearbyOffers, reviews}: OfferPageProps): JSX.Element
     return <NotFoundPage />;
   }
 
-  const shownNearbyOffers = nearbyOffers
+  const shownNearbyOffers = offers
     .filter((item) => item.id !== offer.id && item.city.name === offer.city.name)
     .slice(0, MAX_NEARBY_COUNT);
 
@@ -177,7 +174,7 @@ function OfferPage({offers, nearbyOffers, reviews}: OfferPageProps): JSX.Element
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <ReviewsList reviews={reviews} />
+                <ReviewsList reviews={[]} />
                 <ReviewForm />
               </section>
             </div>
