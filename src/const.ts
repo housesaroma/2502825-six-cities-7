@@ -8,6 +8,7 @@ export const AppRoute = {
 
 export const APIRoute = {
   Offers: '/offers',
+  Login: '/login',
 } as const;
 
 export const AuthorizationStatus = {
